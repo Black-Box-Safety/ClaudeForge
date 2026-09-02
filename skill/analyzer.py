@@ -177,12 +177,6 @@ class CLAUDEMDAnalyzer:
                 "severity": "high",
                 "message": f"File exceeds the 150-line cap ({self.line_count} lines). Split now."
             })
-        elif self.line_count > 120:
-            issues.append({
-                "type": "length_warning",
-                "severity": "medium",
-                "message": f"File is approaching the 150-line cap ({self.line_count} lines)."
-            })
 
         # Check if file is too short
         if self.line_count < 30:

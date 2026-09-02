@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Removed the 120-line warning threshold; the 150-line hard cap is the only length rule (BBS decision 2026-09-02).
+
 ### Added (wave 5 — CLAUDE.md → AGENTS.md conversion for Codex / Gemini)
 
 Cross-tool adoption: every project using ClaudeForge can now share its instructions with non-Claude tools (OpenAI Codex, Gemini Code Assist, anything honouring the AGENTS.md convention) without maintaining two files.

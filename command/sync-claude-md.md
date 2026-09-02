@@ -139,7 +139,7 @@ Do not commit. Leave the diff staged-but-uncommitted so the user can review with
 
 - After completing a feature, major refactor, or dependency change.
 - When `claude-md-guardian` flags drift on session start.
-- Whenever any single CLAUDE.md grows past ~120 lines (warning threshold).
+- Whenever any single CLAUDE.md reaches the 150-line hard cap.
 - Before cutting a release — keeps documentation truthful at the tag boundary.
 
 ## Companion Tools
