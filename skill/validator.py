@@ -15,7 +15,6 @@ class BestPracticesValidator:
     # Hard cap: every CLAUDE.md (root or modular) must stay under this.
     # Modular split is required when content would exceed this cap.
     MAX_RECOMMENDED_LINES = 150
-    WARNING_THRESHOLD_LINES = 120
 
     # Minimum content requirements
     MIN_LINES = 20
@@ -141,10 +140,6 @@ class BestPracticesValidator:
             status = "fail"
             message = f"File exceeds maximum recommended length ({self.line_count} > {self.MAX_RECOMMENDED_LINES} lines)"
             severity = "high"
-        elif self.line_count > self.WARNING_THRESHOLD_LINES:
-            status = "warning"
-            message = f"File is approaching maximum length ({self.line_count} lines, recommended < {self.WARNING_THRESHOLD_LINES})"
-            severity = "medium"
         elif self.line_count < self.MIN_LINES:
             status = "fail"
             message = f"File is too short ({self.line_count} lines, minimum {self.MIN_LINES})"

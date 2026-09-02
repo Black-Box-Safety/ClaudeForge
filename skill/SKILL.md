@@ -313,7 +313,7 @@ Analyzes existing CLAUDE.md files to identify structure, sections, and quality i
 Validates CLAUDE.md files against best practices and Anthropic guidelines.
 
 **Key Functions**:
-- `validate_length()` - Check file length (hard cap: 150 lines; warn from 120)
+- `validate_length()` - Check file length (hard cap: 150 lines)
 - `validate_structure()` - Verify required sections present
 - `validate_formatting()` - Check markdown formatting quality
 - `validate_completeness()` - Ensure critical information included
