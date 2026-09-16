@@ -30,12 +30,12 @@ hooks:
     - matcher: "Write|Edit"
       hooks:
         - type: command
-          command: "python3 ${CLAUDE_PLUGIN_ROOT:-${CLAUDE_PROJECT_DIR}}/hooks/validate-claude-md.py"
+          command: 'python3 "${CLAUDE_PLUGIN_ROOT:-${CLAUDE_PROJECT_DIR}}/hooks/validate-claude-md.py"'
   InstructionsLoaded:
     - matcher: "session_start|nested_traversal|path_glob_match|include|compact"
       hooks:
         - type: command
-          command: "python3 ${CLAUDE_PLUGIN_ROOT:-${CLAUDE_PROJECT_DIR}}/hooks/validate-claude-md.py"
+          command: 'python3 "${CLAUDE_PLUGIN_ROOT:-${CLAUDE_PROJECT_DIR}}/hooks/validate-claude-md.py"'
 ---
 
 # CLAUDE.md Guardian Agent
