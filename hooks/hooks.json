@@ -7,7 +7,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 ${CLAUDE_PLUGIN_ROOT:-${CLAUDE_PROJECT_DIR}}/hooks/validate-claude-md.py",
+            "command": "for py in python3 python py; do \"$py\" -c '' </dev/null >/dev/null 2>&1 && exec \"$py\" \"${CLAUDE_PLUGIN_ROOT:-${CLAUDE_PROJECT_DIR}}/hooks/validate-claude-md.py\"; done; exit 0",
             "timeout": 10
           }
         ]
@@ -19,7 +19,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 ${CLAUDE_PLUGIN_ROOT:-${CLAUDE_PROJECT_DIR}}/hooks/validate-claude-md.py",
+            "command": "for py in python3 python py; do \"$py\" -c '' </dev/null >/dev/null 2>&1 && exec \"$py\" \"${CLAUDE_PLUGIN_ROOT:-${CLAUDE_PROJECT_DIR}}/hooks/validate-claude-md.py\"; done; exit 0",
             "timeout": 10
           }
         ]
@@ -31,7 +31,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 ${CLAUDE_PLUGIN_ROOT:-${CLAUDE_PROJECT_DIR}}/hooks/audit-claude-md.py",
+            "command": "for py in python3 python py; do \"$py\" -c '' </dev/null >/dev/null 2>&1 && exec \"$py\" \"${CLAUDE_PLUGIN_ROOT:-${CLAUDE_PROJECT_DIR}}/hooks/audit-claude-md.py\"; done; exit 0",
             "timeout": 10
           }
         ]

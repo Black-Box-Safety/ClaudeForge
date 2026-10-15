@@ -30,12 +30,12 @@ hooks:
     - matcher: "Write|Edit"
       hooks:
         - type: command
-          command: "python3 ${CLAUDE_PLUGIN_ROOT:-${CLAUDE_PROJECT_DIR}}/hooks/validate-claude-md.py"
+          command: "for py in python3 python py; do \"$py\" -c '' </dev/null >/dev/null 2>&1 && exec \"$py\" \"${CLAUDE_PLUGIN_ROOT:-${CLAUDE_PROJECT_DIR}}/hooks/validate-claude-md.py\"; done; exit 0"
   InstructionsLoaded:
     - matcher: "session_start|nested_traversal|path_glob_match|include|compact"
       hooks:
         - type: command
-          command: "python3 ${CLAUDE_PLUGIN_ROOT:-${CLAUDE_PROJECT_DIR}}/hooks/validate-claude-md.py"
+          command: "for py in python3 python py; do \"$py\" -c '' </dev/null >/dev/null 2>&1 && exec \"$py\" \"${CLAUDE_PLUGIN_ROOT:-${CLAUDE_PROJECT_DIR}}/hooks/validate-claude-md.py\"; done; exit 0"
 ---
 
 # CLAUDE.md Guardian Agent

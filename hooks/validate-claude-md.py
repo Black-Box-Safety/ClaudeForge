@@ -68,19 +68,23 @@ def _candidate_paths(payload: dict) -> list[str]:
 
 
 def _is_claude_md(path: str, exempt_suffix: str) -> bool:
-    base = os.path.basename(path)
+    # Normalise separators so Windows paths match the same way on any OS.
+    norm = path.replace("\\", "/")
+    base = norm.rsplit("/", 1)[-1]
     # Personal-tier overrides (CLAUDE.local.md and any matching suffix) are
     # exempt from the cap — they live outside the chained team-shared tree.
     if base.endswith(exempt_suffix):
         return False
-    return base == "CLAUDE.md" or "/.claude/rules/" in path
+    return base == "CLAUDE.md" or "/.claude/rules/" in norm
 
 
 def main() -> int:
     if sys.stdin.isatty():
         return 0
 
-    raw = sys.stdin.read().strip()
+    # Claude Code sends the payload as UTF-8. Decode it explicitly: on Windows
+    # sys.stdin uses the ANSI code page, which garbles non-ASCII paths.
+    raw = sys.stdin.buffer.read().decode("utf-8", errors="replace").strip()
     if not raw:
         return 0
     try:
@@ -100,7 +104,8 @@ def main() -> int:
         if not _is_claude_md(path, exempt_suffix) or not os.path.exists(path):
             continue
         try:
-            with open(path, encoding="utf-8") as fh:
+            # Count bytes, not text, so a file in any encoding cannot crash the hook.
+            with open(path, "rb") as fh:
                 line_count = sum(1 for _ in fh)
         except OSError:
             continue
@@ -110,6 +115,10 @@ def main() -> int:
     if not violations:
         return 0
 
+    # Claude Code reads hook output as UTF-8; Windows would otherwise encode
+    # stderr in the ANSI code page and mangle non-ASCII paths in the message.
+    if hasattr(sys.stderr, "reconfigure"):
+        sys.stderr.reconfigure(encoding="utf-8", errors="backslashreplace")
     for path, line_count in violations:
         print(
             f"ClaudeForge: {path} is {line_count} lines (cap is {max_lines}). "

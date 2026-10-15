@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed (Windows hook reliability)
+
+Every hook failed, or quietly did nothing, on common Windows setups. Each `PostToolUse` edit then showed a red hook error.
+
+- **Script path is quoted** (`hooks/hooks.json`, `agent/claude-md-guardian.md`). `${CLAUDE_PLUGIN_ROOT}` sits under the user profile, so a username with a space split the path and Python reported `can't open file 'C:\Users\<first-word>'`. Python exits 2 on a missing file, which Claude Code reports as a blocking hook error.
+- **Interpreter is found, not assumed.** Hooks try `python3`, `python`, then `py`, and use the first that actually runs. This skips the Microsoft Store `python3` stub. With no Python installed the hook exits 0 instead of erroring.
+- **Hook payload and messages use UTF-8** (`validate-claude-md.py`). Windows decoded stdin in the ANSI code page, so a non-ASCII profile path never matched a real file and the cap check silently skipped it. The over-cap message is written as UTF-8 so the path in it reads correctly.
+- **Backslash paths are recognised** for both `CLAUDE.md` and `.claude/rules/` files, so the cap applies on Windows.
+- **Line counts read bytes** (both hooks). A CLAUDE.md saved in a non-UTF-8 encoding no longer crashes the hook with a traceback.
+
 ### Added (wave 5 — CLAUDE.md → AGENTS.md conversion for Codex / Gemini)
 
 Cross-tool adoption: every project using ClaudeForge can now share its instructions with non-Claude tools (OpenAI Codex, Gemini Code Assist, anything honouring the AGENTS.md convention) without maintaining two files.
