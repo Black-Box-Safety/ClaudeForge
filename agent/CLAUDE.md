@@ -34,17 +34,17 @@ hooks:
     - matcher: "Write|Edit"
       hooks:
         - type: command
-          command: "for py in python3 python py; do \"$py\" -c '' </dev/null >/dev/null 2>&1 && exec \"$py\" \"${CLAUDE_PLUGIN_ROOT:-${CLAUDE_PROJECT_DIR}}/hooks/validate-claude-md.py\"; done; exit 0"
+          command: "<launcher line, copied from hooks/hooks.json>"
   InstructionsLoaded:
     - matcher: "session_start|nested_traversal|path_glob_match|include|compact"
       hooks:
         - type: command
-          command: "for py in python3 python py; do \"$py\" -c '' </dev/null >/dev/null 2>&1 && exec \"$py\" \"${CLAUDE_PLUGIN_ROOT:-${CLAUDE_PROJECT_DIR}}/hooks/validate-claude-md.py\"; done; exit 0"
+          command: "<launcher line, copied from hooks/hooks.json>"
 ```
 
 The array-of-`{event, commands}` shape used in earlier versions did not match the documented schema and silently did not fire.
 
-Keep the launcher line when editing a hook command. It quotes the script path (a space anywhere in the path, such as a Windows username, otherwise splits it), and it tries `python3`, `python` and `py` in turn, using the first one that actually runs. That skips the Microsoft Store `python3` stub on Windows, and exits 0 quietly when no Python is installed rather than erroring on every edit.
+`hooks/hooks.json` holds the launcher line; copy it from there, never retype it. It quotes the script path (a space anywhere in the path, such as a Windows username, otherwise splits it), and tries `python3`, `python` and `py` in turn, using the first that runs as Python 3.7 or later. That skips the Microsoft Store `python3` stub on Windows. When none is found, the `PostToolUse` launcher prints a `systemMessage` saying the check did not run, so an unguarded machine does not look guarded; the `InstructionsLoaded` and `Stop` launchers exit 0 quietly, because Claude Code discards `InstructionsLoaded` output and a `Stop` message would repeat every turn.
 
 ## Skill ↔ Agent Integration
 
