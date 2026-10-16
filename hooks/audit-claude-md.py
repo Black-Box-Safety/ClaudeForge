@@ -61,7 +61,8 @@ def main() -> int:
     near = 0
     for path in _iter_claude_md(_project_root()):
         try:
-            with open(path, encoding="utf-8") as fh:
+            # Count bytes, not text, so a file in any encoding cannot crash the hook.
+            with open(path, "rb") as fh:
                 lines = sum(1 for _ in fh)
         except OSError:
             continue

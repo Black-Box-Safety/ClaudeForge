@@ -469,8 +469,8 @@ Adjusts detail level:
 
 ## Version
 
-**Version**: 1.0.0
-**Last Updated**: November 2025
+**Version**: 2.1.1
+**Last Updated**: October 2026
 **Compatible**: Claude Code 2.0+, Claude Apps, Claude API
 
 Remember: The goal is to make Claude more efficient and context-aware, not to create bureaucracy. Start simple, iterate based on real usage, and automate quality checks where possible.

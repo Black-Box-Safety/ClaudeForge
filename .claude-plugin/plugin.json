@@ -1,7 +1,7 @@
 {
   "name": "claudeforge",
   "description": "CLAUDE.md lifecycle toolkit: initialise, enhance, sync, and modularise CLAUDE.md files with a 150-line cap, automatic chaining, and Karpathy behavioural guardrails.",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "author": {
     "name": "Alireza Rezvani",
     "url": "https://github.com/alirezarezvani"

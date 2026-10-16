@@ -291,7 +291,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🚦 Project Status
 
-**Version:** 2.1.0 (see [CHANGELOG.md](CHANGELOG.md))
+**Version:** 2.1.1 (see [CHANGELOG.md](CHANGELOG.md))
 **Status:** ✅ Stable & Production-Ready
 **Requires:** Claude Code 2.1.4+ for hooks/`InstructionsLoaded`/`paths:` features
 
