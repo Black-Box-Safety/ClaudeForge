@@ -14,7 +14,7 @@ Five components ship in this repo:
 4. **Guardian agent** (`claude-md-guardian`, in `agent/`) — background sync triggered by `SessionStart` / `PreToolUse` / `PostToolUse` hooks.
 5. **Karpathy guidelines skill** (`karpathy-guidelines`, in `skill/karpathy-guidelines/`) — behavioural guardrails embedded into every generated CLAUDE.md. Adapted with attribution from the MIT-licensed [forrestchang/andrej-karpathy-skills](https://github.com/forrestchang/andrej-karpathy-skills) repo.
 
-Current version: **2.1.0** — see `CHANGELOG.md`. v1 → v2 upgrade: `docs/MIGRATION_V2.md`.
+Current version: **2.1.1** — see `CHANGELOG.md`. v1 → v2 upgrade: `docs/MIGRATION_V2.md`.
 
 ## Quick Navigation
 
